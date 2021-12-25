@@ -1,3 +1,7 @@
+"""
+methods to retrieve data from https://spyglass-api.web.app/ `accounts`-tab
+"""
+
 from .main import (
     get_confirmed_transactions,
     get_delegators,

@@ -1,3 +1,6 @@
+"""
+methods to retrieve data from https://spyglass-api.web.app/ `distribution`-tab
+"""
 from .main import (
     get_buckets,
     get_burn,

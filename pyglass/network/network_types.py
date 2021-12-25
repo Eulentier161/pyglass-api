@@ -3,6 +3,9 @@ class NcRepresentative:
         self.address: str = nc_representative["address"]
         self.weight: int = nc_representative["weight"]
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class NakamotoCoefficient:
     def __init__(self, request: dict) -> None:
@@ -14,11 +17,17 @@ class NakamotoCoefficient:
         ]
         self.nc_reps_weight: int = request["ncRepsWeight"]
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class Peer:
     def __init__(self, request: dict) -> None:
         self.count: int = request["count"]
         self.version: str = request["version"]
+
+    def __repr__(self) -> str:
+        return str(self.__dict__)
 
 
 class Quorum:
@@ -30,7 +39,10 @@ class Quorum:
         self.offline_weight: int = request["offlineWeight"]
         self.online_percent: float = request["onlinePercent"]
         self.online_weight: int = request["onlineWeight"]
-        self.onlineWeightMinimum: int = request["onlineWeightMinimum"]
-        self.onlineWeightQuorumPercent: int = request["onlineWeightQuorumPercent"]
-        self.peersStakeWeight: int = request["peersStakeWeight"]
-        self.quorumDelta: int = request["quorumDelta"]
+        self.online_weight_minimum: int = request["onlineWeightMinimum"]
+        self.online_weight_quorum_percent: int = request["onlineWeightQuorumPercent"]
+        self.peers_stake_weight: int = request["peersStakeWeight"]
+        self.quorum_delta: int = request["quorumDelta"]
+
+    def __repr__(self) -> str:
+        return str(self.__dict__)

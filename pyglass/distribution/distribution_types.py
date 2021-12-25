@@ -6,6 +6,9 @@ class BurnAccount:
         self.address: str = burn_account["address"]
         self.pending: int = burn_account["pending"]
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class Burn:
     def __init__(self, request: dict) -> None:
@@ -13,6 +16,9 @@ class Burn:
         self.burn_accounts: list[BurnAccount] = [
             BurnAccount(burn_account) for burn_account in request["burnAccounts"]
         ]
+
+    def __repr__(self) -> str:
+        return str(self.__dict__)
 
 
 class Buckets:
@@ -32,11 +38,17 @@ class Buckets:
         self.number1_000_000: int = request["number1_000_000"]
         self.total_accounts: int = request["totalAccounts"]
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class DeveloperWallet:
     def __init__(self, wallet: dict) -> None:
         self.address: str = wallet["address"]
         self.balance: int = wallet["balance"]
+
+    def __repr__(self) -> str:
+        return str(self.__dict__)
 
 
 class DeveloperFunds:
@@ -46,12 +58,18 @@ class DeveloperFunds:
             DeveloperWallet(wallet) for wallet in request["wallets"]
         ]
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class RichListItem:
     def __init__(self, request: dict) -> None:
         self.address: str = request["address"]
         self.amount: float = request["amount"]
         self.representative: Optional[str] = request.get("representative", None)
+
+    def __repr__(self) -> str:
+        return str(self.__dict__)
 
 
 class Supply:
@@ -62,3 +80,6 @@ class Supply:
         self.dev_fund_amount: int = request["devFundAmount"]
         self.dev_fund_percent: float = request["devFundPercent"]
         self.total_amount: int = request["totalAmount"]
+
+    def __repr__(self) -> str:
+        return str(self.__dict__)

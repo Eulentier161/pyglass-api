@@ -1,9 +1,10 @@
 from requests import get
 from .block_types import Block
 
-block_url = "https://api.spyglass.pw/banano/v1/block/"
+BLOCK_URL = "https://api.spyglass.pw/banano/v1/block/"
 
 
-def get_block(hash: str) -> Block:
-    request = get(f"{block_url}{hash}")
+def get_block(block_hash: str) -> Block:
+    """https://spyglass-api.web.app/account/block"""
+    request = get(f"{BLOCK_URL}{block_hash}")
     return Block(request.json())

@@ -6,6 +6,9 @@ class Alias:
         self.address: str = request["address"]
         self.alias: str = request["alias"]
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class ConfirmationInfo:
     def __init__(self, confirmation_info: dict) -> None:
@@ -18,11 +21,14 @@ class ConfirmationInfo:
         self.percentile95: Optional[int] = confirmation_info.get("percentile95", None)
         self.percentile99: Optional[int] = confirmation_info.get("percentile99", None)
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class MonitoredRepresentative:
     def __init__(self, request: dict) -> None:
-        self.address: str = request["address"]
-        self.cementedBlocks: Optional[int] = request.get("cementedBlocks", None)
+        self.address: str = request.get("address", None)
+        self.cemented_blocks: Optional[int] = request.get("cementedBlocks", None)
         conf_info = request.get("confirmationInfo", None)
         self.confirmation_info: Optional[ConfirmationInfo] = (
             ConfirmationInfo(conf_info) if conf_info else None
@@ -42,6 +48,9 @@ class MonitoredRepresentative:
         self.version: Optional[str] = request.get("version", None)
         self.weight: Optional[float] = request.get("weight", None)
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class Outage:
     def __init__(self, outage: dict) -> None:
@@ -55,6 +64,9 @@ class Outage:
         self.online_date: Optional[str] = outage.get("onlineDate", None)
         self.duration_minutes: Optional[int] = outage.get("durationMinutes", None)
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class UptimePercentages:
     def __init__(self, uptime_percentages: dict) -> None:
@@ -63,6 +75,9 @@ class UptimePercentages:
         self.month: Optional[float] = uptime_percentages.get("month", None)
         self.semi_annual: Optional[float] = uptime_percentages.get("semiAnnual", None)
         self.year: Optional[float] = uptime_percentages.get("year", None)
+
+    def __repr__(self) -> str:
+        return str(self.__dict__)
 
 
 class UptimeStats:
@@ -83,6 +98,9 @@ class UptimeStats:
             "trackingStartUnixTimestamp"
         ]
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class Representative:
     def __init__(self, request: dict) -> None:
@@ -102,6 +120,9 @@ class Representative:
         )
         self.weight = request["weight"]
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class MonitorStats:
     def __init__(self, monitor_stats: dict) -> None:
@@ -113,6 +134,9 @@ class MonitorStats:
         ]
         self.has_min_memory_requirement: bool = monitor_stats["hasMinMemoryRequirement"]
         self.name: str = monitor_stats["name"]
+
+    def __repr__(self) -> str:
+        return str(self.__dict__)
 
 
 class Score:
@@ -135,6 +159,9 @@ class Score:
         self.weight: int = request["weight"]
         self.weight_percentage: float = request["weightPercentage"]
 
+    def __repr__(self) -> str:
+        return str(self.__dict__)
+
 
 class Uptime:
     def __init__(self, request: dict) -> None:
@@ -149,3 +176,6 @@ class Uptime:
         self.ping_stats: Optional[list] = request.get("pingStats", None)
         self.tracking_start_date: str = request["trackingStartDate"]
         self.tracking_start_unix_timestamp: int = request["trackingStartUnixTimestamp"]
+
+    def __repr__(self) -> str:
+        return str(self.__dict__)
