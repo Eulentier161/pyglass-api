@@ -42,8 +42,12 @@ def test_delegators():
 
 def test_insights():
     for addr in ADDRESSES:
-        subject = get_insights(addr, include_height_balances=True)
-        check(subject)
+        if addr != ADDRESSES[-1]:
+            subject = get_insights(addr, include_height_balances=True)
+            check(subject)
+        else:
+            with raises(SpyglassException):
+                get_insights(addr, True)
 
 
 def test_representative():

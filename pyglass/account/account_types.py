@@ -36,23 +36,23 @@ class Insights:
     first_in_tx_unix_timestamp: int
     first_out_tx_hash: Optional[str]
     first_out_tx_unix_timestamp: Optional[int]
-    height_balances: Optional[list[int]]
+    height_balances: Optional[list[Union[int, float]]]
     last_in_tx_hash: str
     last_in_tx_unix_timestamp: int
     last_out_tx_hash: Optional[str]
     last_out_tx_unix_timestamp: Optional[int]
-    max_amount_received: float
+    max_amount_received: Union[int, float]
     max_amount_received_hash: str
     max_amount_sent: Union[int, float]
     max_amount_sent_hash: Optional[str]
-    max_balance: float
+    max_balance: Union[int, float]
     max_balance_hash: str
     most_common_recipient_address: Optional[str]
     most_common_recipient_tx_count: int
     most_common_sender_address: str
     most_common_sender_tx_count: int
-    total_amount_received: float
-    total_amount_sent: float
+    total_amount_received: Union[int, float]
+    total_amount_sent: Union[int, float]
     total_tx_change: int
     total_tx_received: int
     total_tx_sent: int
