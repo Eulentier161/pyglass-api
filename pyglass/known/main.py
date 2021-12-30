@@ -1,5 +1,6 @@
 from requests import get, post
 
+from .. import SpyglassException
 from .known_types import Account
 
 KNOWN_URL = "https://api.spyglass.pw/banano/v1/known/"
@@ -14,11 +15,28 @@ def get_accounts(
         "includeType": include_type,
         "typeFilter": type_filter,
     }
-    request = post(f"{KNOWN_URL}accounts", json=data)
-    return [Account(account) for account in request.json()]
+    response = post(f"{KNOWN_URL}accounts", json=data)
+    if not response.ok:
+        raise SpyglassException(response.text)
+
+    accounts: list[dict] = response.json()
+
+    return [
+        Account(
+            address=account["address"],
+            alias=account["alias"],
+            owner=account.get("owner", None),
+            type=account.get("type", None),
+        )
+        for account in accounts
+    ]
 
 
 def get_vanities() -> list[str]:
     """https://spyglass-api.web.app/known/vanities"""
-    request = get(f"{KNOWN_URL}vanities")
-    return request.json()
+    response = get(f"{KNOWN_URL}vanities")
+    if not response.ok:
+        raise SpyglassException(response.json())
+
+    vanities: list[str] = response.json()
+    return vanities

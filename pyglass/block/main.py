@@ -1,6 +1,7 @@
 from requests import get
+
+from .. import SpyglassException
 from .block_types import Block, BlockContents
-from pyglass import SpyglassException
 
 BLOCK_URL = "https://api.spyglass.pw/banano/v1/block/"
 

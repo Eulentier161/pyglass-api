@@ -1,8 +1,8 @@
 from typing import Union
 
-from pyglass import SpyglassException
 from requests import get, post
 
+from .. import SpyglassException
 from .account_types import (
     ConfirmedTX,
     Delegator,
@@ -115,7 +115,7 @@ def get_insights(address: str, include_height_balances: bool = False) -> Insight
         first_in_tx_unix_timestamp=insights["firstInTxUnixTimestamp"],
         first_out_tx_hash=insights.get("firstOutTxHash", None),
         first_out_tx_unix_timestamp=insights.get("firstOutTxUnixTimestamp", None),
-        height_balances=[num for num in insights["heightBalances"].values()]
+        height_balances=list(insights["heightBalances"].values())
         if insights.get("heightBalances", None)
         else None,
         last_in_tx_hash=insights["lastInTxHash"],

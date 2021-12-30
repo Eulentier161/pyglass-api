@@ -1,85 +1,61 @@
-from typing import Optional
+from typing import Optional, Union
+from dataclasses import dataclass
 
 
+@dataclass(frozen=True, order=True)
 class BurnAccount:
-    def __init__(self, burn_account: dict) -> None:
-        self.address: str = burn_account["address"]
-        self.pending: int = burn_account["pending"]
-
-    def __repr__(self) -> str:
-        return str(self.__dict__)
+    address: str
+    pending: int
 
 
+@dataclass(frozen=True, order=True)
 class Burn:
-    def __init__(self, request: dict) -> None:
-        self.total_amount: int = request["totalAmount"]
-        self.burn_accounts: list[BurnAccount] = [
-            BurnAccount(burn_account) for burn_account in request["burnAccounts"]
-        ]
-
-    def __repr__(self) -> str:
-        return str(self.__dict__)
+    total_amount: int
+    burn_accounts: list[BurnAccount]
 
 
+@dataclass(frozen=True, order=True)
 class Buckets:
-    def __init__(self, request: dict) -> None:
-        self.number0_0001: int = request["number0_0001"]
-        self.number0_001: int = request["number0_001"]
-        self.number0_01: int = request["number0_01"]
-        self.number0_1: int = request["number0_1"]
-        self.number1: int = request["number1"]
-        self.number10: int = request["number10"]
-        self.number100: int = request["number100"]
-        self.number100_000: int = request["number100_000"]
-        self.number100_000_000: int = request["number100_000_000"]
-        self.number10_000: int = request["number10_000"]
-        self.number10_000_000: int = request["number10_000_000"]
-        self.number1_000: int = request["number1_000"]
-        self.number1_000_000: int = request["number1_000_000"]
-        self.total_accounts: int = request["totalAccounts"]
-
-    def __repr__(self) -> str:
-        return str(self.__dict__)
+    number0_0001: int
+    number0_001: int
+    number0_01: int
+    number0_1: int
+    number1: int
+    number10: int
+    number100: int
+    number100_000: int
+    number100_000_000: int
+    number10_000: int
+    number10_000_000: int
+    number1_000: int
+    number1_000_000: int
+    total_accounts: int
 
 
+@dataclass(frozen=True, order=True)
 class DeveloperWallet:
-    def __init__(self, wallet: dict) -> None:
-        self.address: str = wallet["address"]
-        self.balance: int = wallet["balance"]
-
-    def __repr__(self) -> str:
-        return str(self.__dict__)
+    address: str
+    balance: int
 
 
+@dataclass(frozen=True, order=True)
 class DeveloperFunds:
-    def __init__(self, request: dict) -> None:
-        self.total_balance: int = request["totalBalance"]
-        self.wallets: list[DeveloperWallet] = [
-            DeveloperWallet(wallet) for wallet in request["wallets"]
-        ]
-
-    def __repr__(self) -> str:
-        return str(self.__dict__)
+    total_balance: int
+    wallets: list[DeveloperWallet]
 
 
+@dataclass(frozen=True, order=True)
 class RichListItem:
-    def __init__(self, request: dict) -> None:
-        self.address: str = request["address"]
-        self.amount: float = request["amount"]
-        self.representative: Optional[str] = request.get("representative", None)
-
-    def __repr__(self) -> str:
-        return str(self.__dict__)
+    address: str
+    amount: Union[int, float]
+    representative: Optional[str]
 
 
+@dataclass(frozen=True, order=True)
 class Supply:
-    def __init__(self, request: dict) -> None:
-        self.burned_amount: int = request["burnedAmount"]
-        self.circulating_amount: int = request["circulatingAmount"]
-        self.circulating_percent: float = request["circulatingPercent"]
-        self.dev_fund_amount: int = request["devFundAmount"]
-        self.dev_fund_percent: float = request["devFundPercent"]
-        self.total_amount: int = request["totalAmount"]
-
-    def __repr__(self) -> str:
-        return str(self.__dict__)
+    burned_amount: int
+    circulating_amount: int
+    circulating_percent: Union[int, float]
+    dev_fund_amount: int
+    dev_fund_percent: Union[int, float]
+    total_amount: int
