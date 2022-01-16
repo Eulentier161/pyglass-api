@@ -17,22 +17,31 @@ ACCOUNT_URL = "https://api.spyglass.pw/banano/v1/account/"
 
 def get_confirmed_transactions(
     address: str,
+    filter_addresses: list[str] = None,
     include_change: bool = True,
     include_receive: bool = True,
     include_send: bool = True,
+    max_amount: Union[int, float] = None,
+    min_amount: Union[int, float] = None,
     offset: int = 0,
     size: int = 25,
 ) -> list[ConfirmedTX]:
     """
+    `filter_addresses`: Only show transactions that include these addresses as sender, recipient, or new representative\n
+    `max_amount`: Maximum number sent/received to be included (not raw)\n
+    `min_amount`: Minimum number sent/received to be included (not raw)\n
     `offset`: Results will be returned starting from this block height\n
     `size`: Max number of blocks to return; defaults to include 25 with a max of 500\n
     https://spyglass-api.web.app/account/confirmed
     """
     data = {
         "address": address,
+        "filterAddresses": filter_addresses,
         "includeChange": include_change,
         "includeReceive": include_receive,
         "includeSend": include_send,
+        "maxAmount": max_amount,
+        "minAmount": min_amount,
         "offset": offset,
         "size": size,
     }
