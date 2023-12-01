@@ -1,3 +1,21 @@
+[tool.black]
+line-length = 120
+
+[tool.poetry]
+name = "pyglass-api"
+version = "0.2.1"
+description = "python wrapper for /dev-ptera/spyglass-api"
+authors = ["Eulentier161 <git@eule.wtf>"]
+repository = "https://github.com/Eulentier161/pyglass-api"
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "pyglass" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+
+
 [build-system]
-requires = ["setuptools >= 40.6.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
