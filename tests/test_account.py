@@ -1,16 +1,9 @@
 from time import sleep
 
-from pyglass import SpyglassException
-from pyglass.account import (
-    get_confirmed_transactions,
-    get_delegators,
-    get_insights,
-    get_overview,
-    get_receivable_transactions,
-    get_representative,
-)
 from pytest import raises
 
+from pyglass import PyglassClient
+from pyglass.exceptions import SpyglassException
 from tests.dataclass_type_check import check
 
 ADDRESSES = [
@@ -20,10 +13,13 @@ ADDRESSES = [
 ]
 
 
+client = PyglassClient("https://api.spyglass.eule.wtf/banano")
+
+
 def test_overview():
     for addr in ADDRESSES:
         sleep(2)
-        subject = get_overview(addr)
+        subject = client.account.get_overview(addr)
         check(subject)
 
 
@@ -31,17 +27,17 @@ def test_confirmed_tx():
     for addr in ADDRESSES:
         sleep(2)
         if addr != ADDRESSES[-1]:
-            for subject in get_confirmed_transactions(addr):
+            for subject in client.account.get_confirmed_transactions(addr):
                 check(subject)
         else:
             with raises(SpyglassException):
-                get_confirmed_transactions(addr)
+                client.account.get_confirmed_transactions(addr)
 
 
 def test_delegators():
     for addr in ADDRESSES:
         sleep(2)
-        subject = get_delegators(addr)
+        subject = client.account.get_delegators(addr)
         check(subject)
         for delegator in subject.delegators:
             check(delegator)
@@ -51,26 +47,26 @@ def test_insights():
     for addr in ADDRESSES:
         sleep(2)
         if addr != ADDRESSES[-1]:
-            subject = get_insights(addr, include_height_balances=True)
+            subject = client.account.get_insights(addr, include_height_balances=True)
             check(subject)
         else:
             with raises(SpyglassException):
-                get_insights(addr, True)
+                client.account.get_insights(addr, True)
 
 
 def test_representative():
     for addr in ADDRESSES:
         sleep(2)
         if addr is not ADDRESSES[-1]:
-            subject = get_representative(addr)
+            subject = client.account.get_representative(addr)
             assert isinstance(subject, str)
         else:
             with raises(SpyglassException):
-                get_representative(addr)
+                client.account.get_representative(addr)
 
 
 def test_receivable_transactions():
     for addr in ADDRESSES:
         sleep(2)
-        for subject in get_receivable_transactions(addr):
+        for subject in client.account.get_receivable_transactions(addr):
             check(subject)

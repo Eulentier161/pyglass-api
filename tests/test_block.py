@@ -1,9 +1,9 @@
 from time import sleep
 
-from pyglass import SpyglassException
-from pyglass.block import get_block
 from pytest import raises
 
+from pyglass import PyglassClient
+from pyglass.exceptions import SpyglassException
 from tests.dataclass_type_check import check
 
 BLOCKS = [
@@ -13,14 +13,16 @@ BLOCKS = [
     "LmaoNotARealBlock123",  # nonsense
 ]
 
+client = PyglassClient("https://api.spyglass.eule.wtf/banano")
+
 
 def test_block():
     for block in BLOCKS:
         sleep(2)
         if block != BLOCKS[-1]:
-            subject = get_block(block)
+            subject = client.block.get_block(block)
             check(subject)
             check(subject.contents)
         else:
             with raises(SpyglassException):
-                get_block(block)
+                client.block.get_block(block)
